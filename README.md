@@ -1,3 +1,8 @@
+# about 
+
+cgrep is a grep variant, written in golang. It will use more cpu than normal grep, but therefor it will be faster. Useful, when to scan directories recursive and grep each file content.
+But it also can read from stdin.
+
 # install
 
 ```zsh
