@@ -1,37 +1,32 @@
 package main
 
 import (
+	"flag"
+
 	"github.com/DionTech/cgrep/pckg/grep"
-	"github.com/devfacet/gocmd"
 )
 
 func main() {
-	flags := struct {
-		Help bool `short:"h" long:"help" description:"Display usage" global:"false"`
-		Scan struct {
-			Path       string `short:"p" long:"path" description:"path to the root folder" required:"true" nonempty:"false"`
-			Expression string `short:"e" long:"expr" description:"expression to search for" required:"true" nonempty:"false"`
-			Threads    int    `short:"t" long:"threads" description:"amount of threads being used"  required:"true" nonempty:"false"`
-		} `command:"scan" description:"search an expression" nonempty:"false"`
-	}{}
+	var path string
+	flag.StringVar(&path, "path", "", "path where to search for")
 
-	gocmd.HandleFlag("Scan", func(cmd *gocmd.Cmd, args []string) error {
+	var threads int
+	flag.IntVar(&threads, "threads", 1, "how many threads should be used")
 
-		scan := &grep.Scan{
-			Path:       flags.Scan.Path,
-			Expression: flags.Scan.Expression,
-			Threads:    flags.Scan.Threads}
+	flag.Parse()
 
-		scan.Run()
+	expr := flag.Arg(0)
 
-		return nil
-	})
+	if path == "" {
+		grep.Grep(expr, threads)
 
-	gocmd.New(gocmd.Options{
-		Name:        "cgrep",
-		Version:     "1.0.0",
-		Description: "concurrent find",
-		Flags:       &flags,
-		ConfigType:  gocmd.ConfigTypeAuto,
-	})
+		return
+	}
+
+	scan := &grep.Scan{
+		Path:       path,
+		Expression: expr,
+		Threads:    threads}
+
+	scan.Run()
 }

@@ -53,8 +53,6 @@ func Walk(files chan string, expression string, wg *sync.WaitGroup) {
 }
 
 func (scan *Scan) Run() {
-	//files := make(chan string, scan.Threads)
-
 	wg := sync.WaitGroup{}
 
 	for i := 0; i < scan.Threads; i++ {
@@ -66,8 +64,6 @@ func (scan *Scan) Run() {
 
 		// If no error
 		if err != nil {
-			//fmt.Println(err)
-
 			return nil
 		}
 
