@@ -16,7 +16,7 @@ Recommended: set an alias.
 ## list options
 
 ```zsh
-scrape
+cgrep
 ```
 
 
