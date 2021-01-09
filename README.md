@@ -37,3 +37,20 @@ Using more threads
 ```zsh
 cgrep --path ./ --threads 10 "^open"
 ```
+
+### ave and load expressions which you often use
+
+save an expression:
+
+```zsh
+cgrep -save -name formAction "form(.?)action="
+```
+
+This will store a named expression "formAction" at /{your-homedir}/cgrep/templates.json
+
+To use it, you can use the option and combine it with the other stuff like for example path grepping:
+
+```zsh
+cgrep -expression formAction -p ./
+```
+
