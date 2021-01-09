@@ -13,7 +13,14 @@ Recommended: set an alias.
 
 ## usage
 
-### reading from stdin 
+## list options
+
+```zsh
+scrape
+```
+
+
+## reading from stdin 
 
 For example, portscan and cgrep:
 
@@ -26,7 +33,7 @@ Using more than one thread:
 portscan scan -i 127.0.0.1 -t 20 | cgrep --threads=20 ^open
 ```
 
-### scan directory recursive and grep file content
+## scan directory recursive and grep file content
 
 ```zsh
 cgrep --path ./ "^open"
@@ -38,7 +45,7 @@ Using more threads
 cgrep --path ./ --threads 10 "^open"
 ```
 
-### ave and load expressions which you often use
+## save and load expressions which you often use
 
 save an expression:
 
