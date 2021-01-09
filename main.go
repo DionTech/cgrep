@@ -14,6 +14,9 @@ func main() {
 	flag.BoolVar(&save, "save", false, "save the actual expression")
 	flag.BoolVar(&save, "s", false, "short for save")
 
+	var show bool
+	flag.BoolVar(&show, "list-templates", false, "list the available templates")
+
 	var name string
 	flag.StringVar(&name, "name", "", "name of the expresion to save")
 	flag.StringVar(&name, "n", "", "short for name")
@@ -34,6 +37,12 @@ func main() {
 
 	if help {
 		flag.PrintDefaults()
+		return
+	}
+
+	if show {
+		grep.PrintTemplates()
+
 		return
 	}
 

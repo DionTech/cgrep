@@ -7,6 +7,7 @@ import (
 	"os"
 
 	"github.com/DionTech/stdoutformat"
+	"github.com/tatsushid/go-prettytable"
 )
 
 type Template struct {
@@ -92,6 +93,40 @@ func LoadExpression(name string) string {
 	return template.Expression
 }
 
-func loadTemplates() {
+func PrintTemplates() {
+	homeDir, err := os.UserHomeDir()
 
+	if err != nil {
+		stdoutformat.Error(err)
+	}
+
+	fileName := homeDir + "/cgrep/templates.json"
+	file, err := os.Open(fileName)
+
+	if err != nil {
+		stdoutformat.Error(err)
+	}
+
+	defer file.Close()
+
+	templates := make(Templates, 0)
+
+	byteValue, _ := ioutil.ReadAll(file)
+	json.Unmarshal(byteValue, &templates)
+
+	tbl, err := prettytable.NewTable([]prettytable.Column{
+		{},
+		{},
+	}...)
+	if err != nil {
+		stdoutformat.Error(err)
+		return
+	}
+	tbl.Separator = "  "
+
+	for name, template := range templates {
+		tbl.AddRow(name, template.Expression)
+	}
+
+	tbl.Print()
 }
