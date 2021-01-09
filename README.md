@@ -61,3 +61,9 @@ To use it, you can use the option and combine it with the other stuff like for e
 cgrep -expression formAction -p ./
 ```
 
+load all available expressions
+
+```zsh
+cgrep -list-templates
+```
+
