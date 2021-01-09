@@ -5,6 +5,7 @@ import (
 	"errors"
 	"io/ioutil"
 	"os"
+	"sort"
 
 	"github.com/DionTech/stdoutformat"
 	"github.com/tatsushid/go-prettytable"
@@ -63,7 +64,7 @@ func SaveExpression(name string, expression string) {
 
 }
 
-func LoadExpression(name string) string {
+func LoadExpression(name string) (string, error) {
 	homeDir, err := os.UserHomeDir()
 
 	if err != nil {
@@ -75,6 +76,7 @@ func LoadExpression(name string) string {
 
 	if err != nil {
 		stdoutformat.Error(err)
+		return "", err
 	}
 
 	defer file.Close()
@@ -87,10 +89,12 @@ func LoadExpression(name string) string {
 	template, exists := templates[name]
 
 	if !exists {
-		stdoutformat.Error(errors.New(name + " not exists"))
+		err = errors.New(name + " not exists")
+		stdoutformat.Error(err)
+		return "", err
 	}
 
-	return template.Expression
+	return template.Expression, nil
 }
 
 func PrintTemplates() {
@@ -124,9 +128,17 @@ func PrintTemplates() {
 	}
 	tbl.Separator = "  "
 
-	for name, template := range templates {
-		tbl.AddRow(name, template.Expression)
+	for _, k := range templates.sort() {
+		tbl.AddRow(k, templates[k].Expression)
 	}
 
 	tbl.Print()
+}
+
+func (m Templates) sort() (index []string) {
+	for k := range m {
+		index = append(index, k)
+	}
+	sort.Strings(index)
+	return
 }

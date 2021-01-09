@@ -49,7 +49,11 @@ func main() {
 	expr := flag.Arg(0)
 
 	if expression != "" {
-		expr = grep.LoadExpression(expression)
+		tmpl, err := grep.LoadExpression(expression)
+		if err != nil {
+			return
+		}
+		expr = tmpl
 	}
 
 	if save {
