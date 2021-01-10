@@ -5,6 +5,7 @@ import (
 	"errors"
 	"io/ioutil"
 	"os"
+	"path/filepath"
 	"sort"
 
 	"github.com/DionTech/stdoutformat"
@@ -25,6 +26,7 @@ func SaveExpression(name string, expression string) {
 	}
 
 	dir := homeDir + "/cgrep/"
+	dir = filepath.FromSlash(dir)
 
 	if _, err := os.Stat(dir); os.IsNotExist(err) {
 		err := os.Mkdir(dir, 0755)
@@ -36,7 +38,7 @@ func SaveExpression(name string, expression string) {
 
 	fileName := dir + "templates.json"
 
-	file, err := os.Open(fileName)
+	file, err := os.Open(filepath.FromSlash(fileName))
 
 	if err != nil {
 		file, err = os.Create(fileName)
@@ -72,7 +74,7 @@ func LoadExpression(name string) (string, error) {
 	}
 
 	fileName := homeDir + "/cgrep/templates.json"
-	file, err := os.Open(fileName)
+	file, err := os.Open(filepath.FromSlash(fileName))
 
 	if err != nil {
 		stdoutformat.Error(err)
@@ -105,7 +107,7 @@ func PrintTemplates() {
 	}
 
 	fileName := homeDir + "/cgrep/templates.json"
-	file, err := os.Open(fileName)
+	file, err := os.Open(filepath.FromSlash(fileName))
 
 	if err != nil {
 		stdoutformat.Error(err)
