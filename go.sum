@@ -1,0 +1,6 @@
+github.com/DionTech/stdoutformat v0.0.0-20210109194642-67e28c07fb6b h1:kOd5M+V+/Pup61x6NCxt0c6qnUHOREu1d5ckj7OpbJE=
+github.com/DionTech/stdoutformat v0.0.0-20210109194642-67e28c07fb6b/go.mod h1:ozQuxJbD62g+aHZBoCq6lYrNHyLTcDa8rsYqDXGfVl0=
+github.com/mattn/go-runewidth v0.0.9 h1:Lm995f3rfxdpd6TSmuVCHVb/QhupuXlYr8sCI/QdE+0=
+github.com/mattn/go-runewidth v0.0.9/go.mod h1:H031xJmbD/WCDINGzjvQ9THkh0rPKHF+m2gUSrubnMI=
+github.com/tatsushid/go-prettytable v0.0.0-20141013043238-ed2d14c29939 h1:BhIUXV2ySTLrKgh/Hnts+QTQlIbWtomXt3LMdzME0A0=
+github.com/tatsushid/go-prettytable v0.0.0-20141013043238-ed2d14c29939/go.mod h1:omGxs4/6hNjxPKUTjmaNkPzehSnNJOJN6pMEbrlYIT4=
