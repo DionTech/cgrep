@@ -13,17 +13,28 @@ type Scan struct {
 	Path       string
 	Expression string
 	Threads    int
+	Mode       string
 }
 
 var files = make(chan string)
 
-func Find(path string, expression string, wg *sync.WaitGroup) {
-	/** done this to text concurrency
+func (scan *Scan) find(path string, wg *sync.WaitGroup) {
+	/** done this to tet concurrency
 	fmt.Println(path)
 	time.Sleep(500 * time.Millisecond)
 	wg.Done()**/
 
-	reg := regexp.MustCompile(expression)
+	reg := regexp.MustCompile(scan.Expression)
+
+	if scan.Mode == "find" {
+		matches := reg.FindStringSubmatch(path)
+		if len(matches) > 0 {
+			fmt.Printf("%s:1: \n", path)
+		}
+		wg.Done()
+		return
+	}
+
 	file, err := os.Open(path)
 	defer file.Close()
 
@@ -46,9 +57,9 @@ func Find(path string, expression string, wg *sync.WaitGroup) {
 	wg.Done()
 }
 
-func Walk(files chan string, expression string, wg *sync.WaitGroup) {
+func (scan *Scan) walk(files chan string, wg *sync.WaitGroup) {
 	for path := range files {
-		Find(path, expression, wg)
+		scan.find(path, wg)
 	}
 }
 
@@ -56,7 +67,7 @@ func (scan *Scan) Run() {
 	wg := sync.WaitGroup{}
 
 	for i := 0; i < scan.Threads; i++ {
-		go Walk(files, scan.Expression, &wg)
+		go scan.walk(files, &wg)
 	}
 
 	filepath.Walk(scan.Path, func(osPath string, f os.FileInfo, err error) error {
