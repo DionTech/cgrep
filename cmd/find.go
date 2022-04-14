@@ -16,12 +16,38 @@ var findCmd = &cobra.Command{
 	Use:   "find",
 	Short: "find some files by expression",
 	Long: `find some files by expression, for example:
-	find -p ./ -e .go
+	find -p ./ -e "stored-expression-name"
+	find ".go"
+
 `,
 	Run: func(cmd *cobra.Command, args []string) {
+		if path == "" {
+			path = "."
+		}
+
+		var expr string
+		if len(args) > 0 {
+			expr = args[0]
+		}
+
+		//we will load a template file
+		if expression != "" {
+			tmpl, err := grep.LoadExpression(expression)
+			if err != nil {
+				return
+			}
+			expr = tmpl
+		}
+
+		if expr == "" {
+			fmt.Println("grep: missing expression to grep for")
+			fmt.Println("Try 'grep --help' for more information.")
+			return
+		}
+
 		scan := &grep.Scan{
 			Path:       path,
-			Expression: expression,
+			Expression: expr,
 			Mode:       "find",
 			Threads:    threads}
 
@@ -32,18 +58,6 @@ var findCmd = &cobra.Command{
 func init() {
 	rootCmd.AddCommand(findCmd)
 
-	findCmd.Flags().StringVarP(&expression, "expression", "e", "", "expression to search")
-	findCmd.Flags().StringVarP(&path, "path", "p", "", "path to search")
-
-	err := findCmd.MarkFlagRequired("expression")
-	if err != nil {
-		fmt.Printf("Error: %v", err)
-		return
-	}
-
-	err = findCmd.MarkFlagRequired("path")
-	if err != nil {
-		fmt.Printf("Error: %v", err)
-		return
-	}
+	findCmd.Flags().StringVarP(&path, "path", "p", "", "path to search; when not set it will be the current directory")
+	findCmd.Flags().IntVarP(&threads, "threads", "t", 1, "number of threads")
 }
