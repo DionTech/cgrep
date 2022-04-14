@@ -9,7 +9,7 @@ But it also can read from stdin.
 go install
 ```
 
-Recommended: set an alias.
+Recommended: set an alias like "cgrep".
 
 ## usage
 
