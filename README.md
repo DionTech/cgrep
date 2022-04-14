@@ -45,6 +45,18 @@ Using more threads
 cgrep grep --path ./ --threads 10 "^open"
 ```
 
+## scan directory recursive and find files by compare its path with the expression to search for
+
+using a stored expression, defining the path
+```zsh
+find -p ./subdir/ -e "stored-expression-name"
+```
+
+find in current directory
+```zsh
+find "txt"
+```
+
 ## save and load expressions which you often use
 
 save an expression:
