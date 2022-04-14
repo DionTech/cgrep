@@ -1,7 +1,8 @@
 # about 
 
-cgrep is a grep variant, written in golang. It will use more cpu than normal grep, but therefor it will be faster. Useful, when to scan directories recursive and grep each file content.
-But it also can read from stdin.
+cgrep is a grep variant, written in golang. It will use more cpu than normal grep, but therefor it will be faster. Useful, when to scan directories recursive and grep each file content. But it also can read from stdin.
+
+Or you can now also scan directories recursive and find files by its path name.
 
 # install
 
@@ -9,7 +10,7 @@ But it also can read from stdin.
 go install
 ```
 
-Recommended: set an alias like "cgrep".
+Recommended: set an alias like "cgrep" or something shorter like "cg".
 
 ## usage
 
