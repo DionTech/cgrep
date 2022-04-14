@@ -16,7 +16,7 @@ Recommended: set an alias like "cgrep".
 ## list options
 
 ```zsh
-cgrep list
+cgrep --help
 ```
 
 
