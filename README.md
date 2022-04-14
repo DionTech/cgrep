@@ -16,7 +16,7 @@ Recommended: set an alias.
 ## list options
 
 ```zsh
-cgrep
+cgrep list
 ```
 
 
@@ -25,24 +25,24 @@ cgrep
 For example, portscan and cgrep:
 
 ```zsh
-portscan scan -i 127.0.0.1 -t 20 | cgrep ^open
+portscan scan -i 127.0.0.1 -t 20 | cgrep grep ^open
 ```
 Using more than one thread:
 
 ```zsh
-portscan scan -i 127.0.0.1 -t 20 | cgrep --threads=20 ^open
+portscan scan -i 127.0.0.1 -t 20 | cgrep grep --threads=20 ^open
 ```
 
 ## scan directory recursive and grep file content
 
 ```zsh
-cgrep --path ./ "^open"
+cgrep grep --path ./ "^open"
 ```
 
 Using more threads
 
 ```zsh
-cgrep --path ./ --threads 10 "^open"
+cgrep grep --path ./ --threads 10 "^open"
 ```
 
 ## save and load expressions which you often use
@@ -50,7 +50,7 @@ cgrep --path ./ --threads 10 "^open"
 save an expression:
 
 ```zsh
-cgrep -save -name formAction "form(.?)action="
+cgrep save -n formAction -e "form(.?)action="
 ```
 
 This will store a named expression "formAction" at /{your-homedir}/cgrep/templates.json
@@ -58,12 +58,12 @@ This will store a named expression "formAction" at /{your-homedir}/cgrep/templat
 To use it, you can use the option and combine it with the other stuff like for example path grepping:
 
 ```zsh
-cgrep -expression formAction -p ./
+cgrep grep -e formAction -p ./
 ```
 
 load all available expressions
 
 ```zsh
-cgrep -list-templates
+cgrep list
 ```
 
