@@ -1,3 +1,7 @@
+[![Go Report Card](https://goreportcard.com/badge/github.com/diontech/cgrep)](https://goreportcard.com/report/github.com/diontech/cgrep)
+![License](https://img.shields.io/dub/l/vibe-d.svg)
+![Project status](https://img.shields.io/badge/version-0.2.0-green.svg)
+
 # about 
 
 cgrep is a grep variant, written in golang. It will use more cpu than normal grep, but therefor it will be faster. Useful, when to scan directories recursive and grep each file content.
