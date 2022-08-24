@@ -1,6 +1,5 @@
 /*
 Copyright © 2022 NAME HERE <EMAIL ADDRESS>
-
 */
 package cmd
 
@@ -11,21 +10,14 @@ import (
 )
 
 var threads int
-var path, expression string
+var path, expression, filter string
 
 // rootCmd represents the base command when called without any subcommands
 var rootCmd = &cobra.Command{
 	Use:   "cgrep",
-	Short: "A brief description of your application",
-	Long: `A longer description that spans multiple lines and likely contains
-examples and usage of using your application. For example:
-
-Cobra is a CLI library for Go that empowers applications.
-This application is a tool to generate the needed files
-to quickly create a Cobra application.`,
-	// Uncomment the following line if your bare application
-	// has an action associated with it:
-	// Run: func(cmd *cobra.Command, args []string) { },
+	Short: "cgrep is a grep / find variant, written in golang.",
+	Long: `AUseful, when to scan directories recursive and grep each file content.
+But it also can read from stdin.You can store / load often used regular expressions, to not have to type them every time.`,
 }
 
 // Execute adds all child commands to the root command and sets flags appropriately.

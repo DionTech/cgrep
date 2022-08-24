@@ -14,6 +14,7 @@ type Scan struct {
 	Expression string
 	Threads    int
 	Mode       string
+	Filter     string
 }
 
 var files = make(chan string)
@@ -23,6 +24,14 @@ func (scan *Scan) find(path string, wg *sync.WaitGroup) {
 	fmt.Println(path)
 	time.Sleep(500 * time.Millisecond)
 	wg.Done()**/
+	if scan.Filter != "" {
+		//make sure filter as a regexp matches the path
+		reg := regexp.MustCompile(scan.Filter)
+		if !reg.MatchString(path) {
+			wg.Done()
+			return
+		}
+	}
 
 	reg := regexp.MustCompile(scan.Expression)
 

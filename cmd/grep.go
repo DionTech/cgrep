@@ -1,6 +1,5 @@
 /*
 Copyright © 2022 NAME HERE <EMAIL ADDRESS>
-
 */
 package cmd
 
@@ -49,6 +48,7 @@ var grepCmd = &cobra.Command{
 		scan := &grep.Scan{
 			Path:       path,
 			Expression: expr,
+			Filter:     filter,
 			Threads:    threads}
 
 		scan.Run()
@@ -61,4 +61,5 @@ func init() {
 	grepCmd.Flags().IntVarP(&threads, "threads", "t", 1, "number of threads")
 	grepCmd.Flags().StringVarP(&path, "path", "p", ".", "path to search")
 	grepCmd.Flags().StringVarP(&expression, "expression", "e", "", "expression to grep for")
+	grepCmd.Flags().StringVarP(&filter, "filter", "f", "", "filtering the path to decide whether to search or not")
 }
