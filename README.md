@@ -49,6 +49,12 @@ Using more threads
 cgrep grep --path ./ --threads 10 "^open"
 ```
 
+filtering the files to grep by a filtering the path
+
+```zsh
+cgrep grep --path ./ --filter .go "^open"
+```
+
 ## save and load expressions which you often use
 
 save an expression:
