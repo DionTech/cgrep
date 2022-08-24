@@ -4,8 +4,9 @@
 
 # about 
 
-cgrep is a grep variant, written in golang. It will use more cpu than normal grep, but therefor it will be faster. Useful, when to scan directories recursive and grep each file content.
-But it also can read from stdin.
+cgrep is a grep variant, written in golang. It will use more cpu than normal grep, but therefor it will be faster. Useful, when to scan directories recursive and grep each file content. But it also can read from stdin.
+
+Or you can now also scan directories recursive and find files by its path name.
 
 # install
 
@@ -13,14 +14,14 @@ But it also can read from stdin.
 go install
 ```
 
-Recommended: set an alias like "cgrep".
+Recommended: set an alias like "cgrep" or something shorter like "cg".
 
 ## usage
 
 ## list options
 
 ```zsh
-cgrep list
+cgrep --help
 ```
 
 
@@ -48,11 +49,22 @@ Using more threads
 ```zsh
 cgrep grep --path ./ --threads 10 "^open"
 ```
-
 filtering the files to grep by a filtering the path
 
 ```zsh
 cgrep grep --path ./ --filter .go "^open"
+```
+
+## scan directory recursive and find files by compare its path with the expression to search for
+
+using a stored expression, defining the path
+```zsh
+find -p ./subdir/ -e "stored-expression-name"
+```
+
+find in current directory
+```zsh
+find "txt"
 ```
 
 ## save and load expressions which you often use
